@@ -36,8 +36,13 @@ const update = async (req, res) => {
     album_id,
     active,
   });
-
   return res.status(edit.status).json(edit.data);
+};
+
+const deleteById = async (req, res) => {
+  const { id } = req.params;
+  const del = await musicService.deleteById(id);
+  return res.status(del.status).json(del.data);
 };
 
 module.exports = {
@@ -46,4 +51,5 @@ module.exports = {
   findOneById,
   create,
   update,
+  deleteById,
 };

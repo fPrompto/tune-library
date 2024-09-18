@@ -7,6 +7,7 @@ const {
   findOneById,
   create,
   update,
+  deleteById,
 } = require('../controllers/musicController');
 
 const musicRouter = Router();
@@ -21,5 +22,8 @@ musicRouter.post(MUSIC_ROUTE.CREATE, create);
 
 // PUT METHODS
 musicRouter.put(MUSIC_ROUTE.UPDATE, update);
+
+// DELETE METHODS
+musicRouter.delete(MUSIC_ROUTE.DELETE, deleteById);
 
 module.exports = musicRouter;

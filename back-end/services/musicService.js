@@ -109,10 +109,36 @@ const update = async ({ id, name, artist, launch_date, album_id, active }) => {
   }
 };
 
+const deleteById = async (id) => {
+  try {
+    const del = await Music.destroy({
+      where: { id },
+    });
+
+    if (del === 0) {
+      return {
+        status: STATUS_CODE.NOT_FOUND,
+        data: '',
+      };
+    }
+
+    return {
+      status: STATUS_CODE.OK,
+      data: del,
+    };
+  } catch (error) {
+    return {
+      status: STATUS_CODE.SERVER_ERROR,
+      data: error,
+    };
+  }
+};
+
 module.exports = {
   findAll,
   findAllActive,
   findOneById,
   create,
   update,
+  deleteById,
 };

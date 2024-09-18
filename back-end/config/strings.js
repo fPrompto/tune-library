@@ -10,12 +10,14 @@ const MUSIC_ROUTE = {
   },
   CREATE: '/create',
   UPDATE: '/update',
+  DELETE: '/delete/id/:id',
 };
 
 const STATUS_CODE = {
   OK: 200,
   CREATED: 201,
   BAD_REQUEST: 400,
+  NOT_FOUND: 404,
   IM_A_TEAPOT: 418,
   SERVER_ERROR: 500,
 };
