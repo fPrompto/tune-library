@@ -1,3 +1,10 @@
+const associate = (models) => {
+  models.Music.belongsTo(models.Album, {
+    foreignKey: 'album_id',
+    as: 'album',
+  });
+};
+
 module.exports = (sequelize, DataTypes) => {
   const Music = sequelize.define(
     'Music',
@@ -17,6 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     { tableName: 'Musics' },
   );
+
+  Music.associate = associate;
 
   return Music;
 };
