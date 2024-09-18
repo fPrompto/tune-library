@@ -27,7 +27,32 @@ const findAllComplete = async () => {
   };
 };
 
+const findOneById = async (id) => {
+  try {
+    const find = await Album.findOne({
+      include: [
+        {
+          model: Music,
+          as: 'musics',
+          attributes: { exclude: ['createdAt', 'updatedAt'] },
+        },
+      ],
+      where: { id },
+    });
+    return {
+      status: STATUS_CODE.OK,
+      data: find.dataValues,
+    };
+  } catch (e) {
+    return {
+      status: STATUS_CODE.BAD_REQUEST,
+      data: e,
+    };
+  }
+};
+
 module.exports = {
   findAll,
   findAllComplete,
+  findOneById,
 };

@@ -10,4 +10,10 @@ const findAllComplete = async (_req, res) => {
   return res.status(find.status).json(find.data);
 };
 
-module.exports = { findAll, findAllComplete };
+const findOneById = async (req, res) => {
+  const { id } = req.params;
+  const find = await albumService.findOneById(id);
+  return res.status(find.status).json(find.data);
+};
+
+module.exports = { findAll, findAllComplete, findOneById };
