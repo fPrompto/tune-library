@@ -15,8 +15,6 @@ const ENDPOINT = {
   DELETE: '/delete/id/:id',
 };
 
-c
-
 const STATUS_CODE = {
   OK: 200,
   CREATED: 201,

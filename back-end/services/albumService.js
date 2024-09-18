@@ -10,8 +10,16 @@ const findAll = async () => {
   };
 };
 
-const findAllWithMusics = async () => {
-  const find = await Album.findAll();
+const findAllComplete = async () => {
+  const find = await Album.findAll({
+    include: [
+      {
+        model: Music,
+        as: 'musics',
+        attributes: { exclude: ['createdAt', 'updatedAt'] },
+      },
+    ],
+  });
 
   return {
     status: STATUS_CODE.OK,
@@ -19,4 +27,7 @@ const findAllWithMusics = async () => {
   };
 };
 
-module.exports = { findAll, find };
+module.exports = {
+  findAll,
+  findAllComplete,
+};
