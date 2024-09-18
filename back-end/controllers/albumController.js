@@ -16,4 +16,19 @@ const findOneById = async (req, res) => {
   return res.status(find.status).json(find.data);
 };
 
-module.exports = { findAll, findAllComplete, findOneById };
+const create = async (req, res) => {
+  const { name, artist, launch_date } = req.body;
+  const newAlbum = await albumService.create({
+    name,
+    artist,
+    launch_date,
+  });
+  return res.status(newAlbum.status).json(newAlbum.data);
+};
+
+module.exports = {
+  findAll,
+  findAllComplete,
+  findOneById,
+  create,
+};

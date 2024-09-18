@@ -51,8 +51,30 @@ const findOneById = async (id) => {
   }
 };
 
+const create = async ({ name, artist, launch_date }) => {
+  try {
+    const newAlbum = Album.create({
+      name,
+      artist,
+      launch_date,
+      active: true,
+    });
+
+    return {
+      status: STATUS_CODE.CREATED,
+      data: newAlbum,
+    };
+  } catch (error) {
+    return {
+      status: STATUS_CODE.BAD_REQUEST,
+      data: error,
+    };
+  }
+};
+
 module.exports = {
   findAll,
   findAllComplete,
   findOneById,
+  create,
 };

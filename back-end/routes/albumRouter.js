@@ -2,7 +2,12 @@ const { Router } = require('express');
 
 const { ENDPOINT } = require('../config/strings');
 
-const { findAll, findAllComplete, findOneById } = require('../controllers/albumController');
+const {
+  findAll,
+  findAllComplete,
+  findOneById,
+  create,
+} = require('../controllers/albumController');
 
 const albumRouter = Router();
 
@@ -10,5 +15,8 @@ const albumRouter = Router();
 albumRouter.get(ENDPOINT.FIND.ALL, findAll);
 albumRouter.get(ENDPOINT.FIND.ALL_COMPLETE, findAllComplete);
 albumRouter.get(ENDPOINT.FIND.ID, findOneById);
+
+// POST METHODS
+albumRouter.post(ENDPOINT.CREATE, create);
 
 module.exports = albumRouter;
