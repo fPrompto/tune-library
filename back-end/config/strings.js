@@ -8,6 +8,7 @@ const ENDPOINT = {
     ALL: '/find/all',
     ACTIVE: '/find/active',
     ID: '/find/id/:id',
+    ALL_COMPLETE: '/find/allcomplete'
   },
   CREATE: '/create',
   UPDATE: '/update',

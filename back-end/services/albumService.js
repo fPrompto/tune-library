@@ -10,4 +10,13 @@ const findAll = async () => {
   };
 };
 
-module.exports = { findAll };
+const findAllWithMusics = async () => {
+  const find = await Album.findAll();
+
+  return {
+    status: STATUS_CODE.OK,
+    data: find,
+  };
+};
+
+module.exports = { findAll, find };
