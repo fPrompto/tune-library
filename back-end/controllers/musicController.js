@@ -15,8 +15,20 @@ const findOneById = async (req, res) => {
   return res.status(find.status).json(find.data);
 };
 
+const create = async (req, res) => {
+  const { name, artist, launch_date, album_id } = req.body;
+  const newMusic = await musicService.create({
+    name,
+    artist,
+    launch_date,
+    album_id,
+  });
+  return res.status(newMusic.status).json(newMusic.data);
+};
+
 module.exports = {
   findAll,
   findAllActive,
   findOneById,
+  create,
 };

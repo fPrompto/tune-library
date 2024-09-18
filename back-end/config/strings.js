@@ -8,6 +8,7 @@ const MUSIC_ROUTE = {
     ACTIVE: '/find/active',
     ID: '/find/id/:id'
   },
+  CREATE: '/create'
 };
 
 const STATUS_CODE = {
