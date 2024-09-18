@@ -5,6 +5,12 @@ const findAll = async (_req, res) => {
   return res.status(find.status).json(find.data);
 };
 
+const findAllActive = async (_req, res) => {
+  const find = await musicService.findAllActive();
+  return res.status(find.status).json(find.data);
+};
+
 module.exports = {
   findAll,
+  findAllActive,
 };
