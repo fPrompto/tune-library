@@ -72,9 +72,34 @@ const create = async ({ name, artist, launch_date }) => {
   }
 };
 
+const update = async ({ id, name, artist, launch_date, active }) => {
+  try {
+    const edit = Album.update(
+      {
+        name,
+        artist,
+        launch_date,
+        active,
+      },
+      { where: { id } },
+    );
+
+    return {
+      status: STATUS_CODE.OK,
+      data: edit,
+    };
+  } catch (error) {
+    return {
+      status: STATUS_CODE.BAD_REQUEST,
+      data: error,
+    };
+  }
+};
+
 module.exports = {
   findAll,
   findAllComplete,
   findOneById,
   create,
+  update,
 };

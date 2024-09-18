@@ -7,6 +7,7 @@ const {
   findAllComplete,
   findOneById,
   create,
+  update,
 } = require('../controllers/albumController');
 
 const albumRouter = Router();
@@ -18,5 +19,8 @@ albumRouter.get(ENDPOINT.FIND.ID, findOneById);
 
 // POST METHODS
 albumRouter.post(ENDPOINT.CREATE, create);
+
+// PUT METHODS
+albumRouter.put(ENDPOINT.UPDATE, update);
 
 module.exports = albumRouter;
