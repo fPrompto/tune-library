@@ -64,7 +64,7 @@ const findOneById = async (id) => {
 
 const create = async ({ name, artist, launch_date, album_id }) => {
   try {
-    const create = Music.create({
+    const newMusic = Music.create({
       name,
       artist,
       launch_date,
@@ -74,7 +74,32 @@ const create = async ({ name, artist, launch_date, album_id }) => {
 
     return {
       status: STATUS_CODE.CREATED,
-      data: create,
+      data: newMusic,
+    };
+  } catch (error) {
+    return {
+      status: STATUS_CODE.BAD_REQUEST,
+      data: error,
+    };
+  }
+};
+
+const update = async ({ id, name, artist, launch_date, album_id, active }) => {
+  try {
+    const edit = Music.update(
+      {
+        name,
+        artist,
+        launch_date,
+        album_id,
+        active,
+      },
+      { where: { id } },
+    );
+
+    return {
+      status: STATUS_CODE.OK,
+      data: edit,
     };
   } catch (error) {
     return {
@@ -89,4 +114,5 @@ module.exports = {
   findAllActive,
   findOneById,
   create,
+  update,
 };

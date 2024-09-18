@@ -6,9 +6,10 @@ const MUSIC_ROUTE = {
   FIND: {
     ALL: '/find/all',
     ACTIVE: '/find/active',
-    ID: '/find/id/:id'
+    ID: '/find/id/:id',
   },
-  CREATE: '/create'
+  CREATE: '/create',
+  UPDATE: '/update',
 };
 
 const STATUS_CODE = {

@@ -26,9 +26,24 @@ const create = async (req, res) => {
   return res.status(newMusic.status).json(newMusic.data);
 };
 
+const update = async (req, res) => {
+  const { id, name, artist, launch_date, album_id, active } = req.body;
+  const edit = await musicService.update({
+    id,
+    name,
+    artist,
+    launch_date,
+    album_id,
+    active,
+  });
+
+  return res.status(edit.status).json(edit.data);
+};
+
 module.exports = {
   findAll,
   findAllActive,
   findOneById,
   create,
+  update,
 };
