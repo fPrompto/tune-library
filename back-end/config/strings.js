@@ -5,7 +5,8 @@ const ROUTE = {
 const MUSIC_ROUTE = {
   FIND: {
     ALL: '/find/all',
-    ACTIVE: '/find/active'
+    ACTIVE: '/find/active',
+    ID: '/find/id/:id'
   },
 };
 
