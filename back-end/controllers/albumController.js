@@ -38,10 +38,17 @@ const update = async (req, res) => {
   return res.status(edit.status).json(edit.data);
 };
 
+const deleteById = async (req, res) => {
+  const { id } = req.params;
+  const del = await albumService.deleteById(id);
+  return res.status(del.status).json(del.data);
+};
+
 module.exports = {
   findAll,
   findAllComplete,
   findOneById,
   create,
   update,
+  deleteById,
 };

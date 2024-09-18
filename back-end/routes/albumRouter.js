@@ -8,6 +8,7 @@ const {
   findOneById,
   create,
   update,
+  deleteById,
 } = require('../controllers/albumController');
 
 const albumRouter = Router();
@@ -22,5 +23,8 @@ albumRouter.post(ENDPOINT.CREATE, create);
 
 // PUT METHODS
 albumRouter.put(ENDPOINT.UPDATE, update);
+
+// DELETE METHODS
+albumRouter.delete(ENDPOINT.DELETE, deleteById);
 
 module.exports = albumRouter;
