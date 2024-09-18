@@ -1,8 +1,9 @@
 const ROUTE = {
   MUSIC: '/music',
+  ALBUM: '/album',
 };
 
-const MUSIC_ROUTE = {
+const ENDPOINT = {
   FIND: {
     ALL: '/find/all',
     ACTIVE: '/find/active',
@@ -12,6 +13,8 @@ const MUSIC_ROUTE = {
   UPDATE: '/update',
   DELETE: '/delete/id/:id',
 };
+
+c
 
 const STATUS_CODE = {
   OK: 200,
@@ -24,6 +27,6 @@ const STATUS_CODE = {
 
 module.exports = {
   ROUTE,
-  MUSIC_ROUTE,
+  ENDPOINT,
   STATUS_CODE,
 };

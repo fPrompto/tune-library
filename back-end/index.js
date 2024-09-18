@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 const { ROUTE } = require('./config/strings');
-const { musicRouter } = require('./routes');
+const { musicRouter, albumRouter } = require('./routes');
 
 const PORT = process.env.PORT || 7000;
 
@@ -25,5 +25,6 @@ app.get('/', (_req, res) => {
 });
 
 app.use(ROUTE.MUSIC, musicRouter);
+app.use(ROUTE.ALBUM, albumRouter);
 
 app.listen(PORT, () => console.log(`running on port ${PORT}`));

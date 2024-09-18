@@ -1,6 +1,6 @@
 const { Router } = require('express');
 
-const { MUSIC_ROUTE } = require('../config/strings');
+const { ENDPOINT } = require('../config/strings');
 const {
   findAll,
   findAllActive,
@@ -13,17 +13,17 @@ const {
 const musicRouter = Router();
 
 // GET METHODS
-musicRouter.get(MUSIC_ROUTE.FIND.ALL, findAll);
-musicRouter.get(MUSIC_ROUTE.FIND.ACTIVE, findAllActive);
-musicRouter.get(MUSIC_ROUTE.FIND.ID, findOneById);
+musicRouter.get(ENDPOINT.FIND.ALL, findAll);
+musicRouter.get(ENDPOINT.FIND.ACTIVE, findAllActive);
+musicRouter.get(ENDPOINT.FIND.ID, findOneById);
 
 // POST METHODS
-musicRouter.post(MUSIC_ROUTE.CREATE, create);
+musicRouter.post(ENDPOINT.CREATE, create);
 
 // PUT METHODS
-musicRouter.put(MUSIC_ROUTE.UPDATE, update);
+musicRouter.put(ENDPOINT.UPDATE, update);
 
 // DELETE METHODS
-musicRouter.delete(MUSIC_ROUTE.DELETE, deleteById);
+musicRouter.delete(ENDPOINT.DELETE, deleteById);
 
 module.exports = musicRouter;
