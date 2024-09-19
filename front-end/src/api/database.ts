@@ -13,7 +13,25 @@ export const getAlbumData = () => {
       },
       error: function (_jqXHR, textStatus, errorThrown) {
         console.error('error: ', textStatus, errorThrown);
-        reject(new Error('Failed to fetch album data'));
+        reject(new Error('failed to fetch album data'));
+      },
+    });
+  });
+};
+
+export const getAlbumDataById = (id: string) => {
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: `${BACKEND_URL}/album/find/id/${id}`,
+      type: 'GET',
+      dataType: 'json',
+      success: function (response) {
+        console.log('data: ', response);
+        resolve(response);
+      },
+      error: function (_jqXHR, textStatus, errorThrown) {
+        console.error('error: ', textStatus, errorThrown);
+        reject(new Error('failed to fetch album data'));
       },
     });
   });
