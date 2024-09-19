@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { getAlbumDataById } from '@/api/database';
+import Loading from '@/app/components/Loading';
 
 import '@/styles/AlbumDetails.css';
 
@@ -40,7 +41,7 @@ const AlbumDetails: React.FC = () => {
   };
 
   return isLoading ? (
-    <div>Loading... me deleta depois</div>
+    <Loading />
   ) : (
     <div className='album-div'>
       <div className='px-4 sm:px-0'>
