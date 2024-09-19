@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import {
   Disclosure,
   DisclosureButton,
@@ -17,7 +18,9 @@ const navigation = [
   { name: 'Calendar', href: '#', current: false },
 ];
 
-function classNames(...classes) {
+function classNames(
+  ...classes: (string | boolean | null | undefined)[]
+): string {
   return classes.filter(Boolean).join(' ');
 }
 
@@ -47,6 +50,14 @@ const Header: React.FC = () => {
                 alt='Your Company'
                 src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500'
                 className='h-8 w-auto'
+              />
+              <Image
+                src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500'
+                alt='Your Company'
+                className='h-8 w-auto'
+                width={180}
+                height={38}
+                priority
               />
             </div>
             <div className='hidden sm:ml-6 sm:block'>
@@ -148,6 +159,6 @@ const Header: React.FC = () => {
       </DisclosurePanel>
     </Disclosure>
   );
-}
+};
 
 export default Header;
