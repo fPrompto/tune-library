@@ -27,6 +27,26 @@ const findAllComplete = async () => {
   };
 };
 
+const findAllActive = async () => {
+  const find = await Album.findAll({
+    where: {
+      active: true,
+    },
+    include: [
+      {
+        model: Music,
+        as: 'musics',
+        attributes: { exclude: ['createdAt', 'updatedAt'] },
+      },
+    ],
+  });
+
+  return {
+    status: STATUS_CODE.OK,
+    data: find,
+  };
+};
+
 const findOneById = async (id) => {
   try {
     const find = await Album.findOne({
@@ -124,6 +144,7 @@ const deleteById = async (id) => {
 module.exports = {
   findAll,
   findAllComplete,
+  findAllActive,
   findOneById,
   create,
   update,

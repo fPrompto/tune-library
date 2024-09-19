@@ -5,6 +5,7 @@ const { ENDPOINT } = require('../config/strings');
 const {
   findAll,
   findAllComplete,
+  findAllActive,
   findOneById,
   create,
   update,
@@ -16,6 +17,7 @@ const albumRouter = Router();
 // GET METHODS
 albumRouter.get(ENDPOINT.FIND.ALL, findAll);
 albumRouter.get(ENDPOINT.FIND.ALL_COMPLETE, findAllComplete);
+albumRouter.get(ENDPOINT.FIND.ACTIVE, findAllActive);
 albumRouter.get(ENDPOINT.FIND.ID, findOneById);
 
 // POST METHODS

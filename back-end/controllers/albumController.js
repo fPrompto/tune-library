@@ -10,6 +10,11 @@ const findAllComplete = async (_req, res) => {
   return res.status(find.status).json(find.data);
 };
 
+const findAllActive = async (_req, res) => {
+  const find = await albumService.findAllActive();
+  return res.status(find.status).json(find.data);
+};
+
 const findOneById = async (req, res) => {
   const { id } = req.params;
   const find = await albumService.findOneById(id);
@@ -47,6 +52,7 @@ const deleteById = async (req, res) => {
 module.exports = {
   findAll,
   findAllComplete,
+  findAllActive,
   findOneById,
   create,
   update,
