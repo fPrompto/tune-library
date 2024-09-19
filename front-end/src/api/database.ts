@@ -4,7 +4,7 @@ import { BACKEND_URL } from '@/config/config';
 export const getAlbumData = () => {
   return new Promise((resolve, reject) => {
     $.ajax({
-      url: `${BACKEND_URL}/album/find/all`,
+      url: `${BACKEND_URL}/album/find/active`,
       type: 'GET',
       dataType: 'json',
       success: function (response) {
