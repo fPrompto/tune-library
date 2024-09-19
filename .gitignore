@@ -6,19 +6,29 @@
 /front-end/.env
 /back-end/.env
 
-/front-end/build
+.DS_Store
 
 /front-end/.pnp
 /front-end/.pnp.js
+/front-end/.yarn/install-state.gz
 
-/front-end/coverage
+/coverage
+
+/front-end/.next/
+/front-end/out/
+
+/front-end/build
 
 /front-end/.DS_Store
-/front-end/.env.local
-/front-end/.env.development.local
-/front-end/.env.test.local
-/front-end/.env.production.local
+/front-end/*.pem
 
 /front-end/npm-debug.log*
 /front-end/yarn-debug.log*
 /front-end/yarn-error.log*
+
+/front-end/.env*.local
+
+/front-end/.vercel
+
+/front-end/*.tsbuildinfo
+/front-end/next-env.d.ts
