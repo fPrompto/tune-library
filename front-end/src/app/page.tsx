@@ -1,101 +1,108 @@
-import Image from "next/image";
+import React from 'react';
 
-export default function Home() {
+import '../styles/Home.css';
+
+const people = [
+  {
+    name: 'Leslie Alexander',
+    email: 'leslie.alexander@example.com',
+    role: 'Co-Founder / CEO',
+    imageUrl:
+      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    lastSeen: '3h ago',
+    lastSeenDateTime: '2023-01-23T13:23Z',
+  },
+  {
+    name: 'Michael Foster',
+    email: 'michael.foster@example.com',
+    role: 'Co-Founder / CTO',
+    imageUrl:
+      'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    lastSeen: '3h ago',
+    lastSeenDateTime: '2023-01-23T13:23Z',
+  },
+  {
+    name: 'Dries Vincent',
+    email: 'dries.vincent@example.com',
+    role: 'Business Relations',
+    imageUrl:
+      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    lastSeen: null,
+  },
+  {
+    name: 'Lindsay Walton',
+    email: 'lindsay.walton@example.com',
+    role: 'Front-end Developer',
+    imageUrl:
+      'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    lastSeen: '3h ago',
+    lastSeenDateTime: '2023-01-23T13:23Z',
+  },
+  {
+    name: 'Courtney Henry',
+    email: 'courtney.henry@example.com',
+    role: 'Designer',
+    imageUrl:
+      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    lastSeen: '3h ago',
+    lastSeenDateTime: '2023-01-23T13:23Z',
+  },
+  {
+    name: 'Tom Cook',
+    email: 'tom.cook@example.com',
+    role: 'Director of Product',
+    imageUrl:
+      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    lastSeen: null,
+  },
+];
+
+const Home: React.FC = () => {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
+    <div className='main-div'>
+      <ul role='list' className='divide-y divide-gray-100'>
+        {people.map((person) => (
+          <li key={person.email} className='flex justify-between gap-x-6 py-5'>
+            <div className='flex min-w-0 gap-x-4'>
+              <img
+                alt=''
+                src={person.imageUrl}
+                className='h-12 w-12 flex-none rounded-full bg-gray-50'
+              />
+              <div className='min-w-0 flex-auto'>
+                <p className='text-sm font-semibold leading-6 text-gray-900 text-white'>
+                  {person.name}
+                </p>
+                <p className='mt-1 truncate text-xs leading-5 text-gray-500 text-white'>
+                  {person.email}
+                </p>
+              </div>
+            </div>
+            <div className='hidden shrink-0 sm:flex sm:flex-col sm:items-end'>
+              <p className='text-sm leading-6 text-gray-900 text-white'>
+                {person.role}
+              </p>
+              {person.lastSeen ? (
+                <p className='mt-1 text-xs leading-5 text-gray-500 text-white'>
+                  Last seen{' '}
+                  <time dateTime={person.lastSeenDateTime}>
+                    {person.lastSeen}
+                  </time>
+                </p>
+              ) : (
+                <div className='mt-1 flex items-center gap-x-1.5'>
+                  <div className='flex-none rounded-full bg-emerald-500/20 p-1'>
+                    <div className='h-1.5 w-1.5 rounded-full bg-emerald-500' />
+                  </div>
+                  <p className='text-xs leading-5 text-gray-500 text-white'>Online</p>
+                </div>
+              )}
+            </div>
           </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        ))}
+      </ul>
     </div>
   );
-}
+};
+
+export default Home;
