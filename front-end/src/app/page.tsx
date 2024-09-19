@@ -42,10 +42,10 @@ const Home: React.FC = () => {
   return isLoading ? (
     <Loading />
   ) : (
-      <>
-        <h1 className='page-title'>Álbuns</h1>
-    <List data={albumData} clickFunction={handleClick} />
-      </>
+    <>
+      <h1 className='page-title'>Álbuns</h1>
+      <List data={albumData} clickFunction={handleClick} />
+    </>
   );
 };
 

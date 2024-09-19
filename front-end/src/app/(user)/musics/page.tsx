@@ -15,10 +15,10 @@ const Home: React.FC = () => {
   const handleClick = (e: React.MouseEvent<HTMLUListElement>) => {
     // Check if the clicked target is an <li> element
     const target = e.target as HTMLElement;
-    const albumItem = target.closest('li'); // Get closest <li> ancestor
+    const musicItem = target.closest('li'); // Get closest <li> ancestor
 
-    if (albumItem) {
-      const albumId = albumItem.id; // Directly access id from the <li>
+    if (musicItem) {
+      const albumId = musicItem.id; // Directly access id from the <li>
       console.log('album id =>', albumId);
       router.push(`/album/${albumId}`);
     }

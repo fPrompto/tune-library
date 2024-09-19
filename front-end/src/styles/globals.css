@@ -31,3 +31,12 @@ body {
   margin-left: 40px;
   margin-top: 26px;
 }
+
+.text-white {
+  color: white;
+}
+
+.menu-button {
+  float:right;
+  margin-right: 30px;
+}

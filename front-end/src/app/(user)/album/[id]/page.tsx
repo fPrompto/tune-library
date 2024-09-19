@@ -49,7 +49,7 @@ const AlbumDetails: React.FC = () => {
           {albumData.name}
         </h3>
         <p className='mt-1 max-w-2xl text-sm leading-6 text-gray-500 text-white'>
-          {`Detalhes do álbum ${albumData.name} da banda ${albumData.artist}`} 
+          {`Detalhes do álbum ${albumData.name} da banda ${albumData.artist}`}
         </p>
       </div>
       <div className='mt-6 border-t border-gray-100'>
@@ -91,11 +91,9 @@ const AlbumDetails: React.FC = () => {
               Músicas:
             </dt>
             <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 text-white'>
-                {albumData.musics.map((music) => {
-                  return (
-                    <p key={music.name}>{music.name}</p>
-                  )
-                })}
+              {albumData.musics.map((music) => {
+                return <p key={music.name}>{music.name}</p>;
+              })}
             </dd>
           </div>
         </dl>
