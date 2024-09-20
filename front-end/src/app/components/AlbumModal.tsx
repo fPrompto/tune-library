@@ -15,7 +15,6 @@ import {
   getCurrentDate,
 } from '@/utils/convertDate';
 import { updateAlbum, createAlbum } from '@/api/database';
-import AlbumI from '@/interfaces/AlbumI';
 import AlbumModalProps from '@/interfaces/AlbumModalProps';
 
 const AlbumModal: React.FC<AlbumModalProps> = ({ openModal, setOpenModal, data, type }) => {
@@ -137,6 +136,7 @@ const AlbumModal: React.FC<AlbumModalProps> = ({ openModal, setOpenModal, data, 
       setTitle();
       setIsLoading(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openModal]);
 
   return isLoading ? (

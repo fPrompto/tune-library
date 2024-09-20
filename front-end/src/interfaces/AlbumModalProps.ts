@@ -1,4 +1,4 @@
-import AlbumI from ''./AlbumI';
+import AlbumI from './AlbumI';
 
 interface AlbumModalProps {
   openModal: boolean;
