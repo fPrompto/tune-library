@@ -6,14 +6,17 @@ import Loading from '@/app/components/Loading';
 import List from '@/app/components/List';
 import MusicModal from '@/app/components/MusicModal';
 
-const Home: React.FC = () => {
-  const [albumData, setAlbumData] = useState([{}]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [openModal, setOpenModal] = useState(false);
-  const [modalType, setModalType] = useState('add');
-  const [selectedMusic, setSelectedMusic] = useState({});
+import MusicI from '@/interfaces/MusicI';
+import { DEFAULT_MUSIC_DATA } from '@/utils/strings';
 
-  const handleClick = (e: React.MouseEvent<HTMLUListElement>) => {
+const Home: React.FC = () => {
+  const [musicData, setMusicData] = useState<MusicI[]>(DEFAULT_MUSIC_DATA);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [modalType, setModalType] = useState<'add' | 'update'>('add');
+  const [selectedMusic, setSelectedMusic] = useState<MusicI>(DEFAULT_MUSIC_DATA[0]);
+
+  const handleClick = (e: React.MouseEvent<HTMLUListElement>): void => {
     const target = e.target as HTMLElement;
     const musicItem = target.closest('li');
 
@@ -23,7 +26,7 @@ const Home: React.FC = () => {
 
       getMusicById(musicId)
         .then((data) => {
-          console.log('Received album data:', data);
+          console.log('received music data:', data);
           setSelectedMusic(data);
           setModalType('update');
           console.log('selected music data =>', selectedMusic);
@@ -35,7 +38,7 @@ const Home: React.FC = () => {
     }
   };
 
-  const handleModal = () => {
+  const handleModal = (): void => {
     setModalType('add');
     setOpenModal(true);
   }
@@ -44,8 +47,8 @@ const Home: React.FC = () => {
     setIsLoading(true);
     getAllMusics()
       .then((data) => {
-        console.log('Received album data:', data);
-        setAlbumData(data);
+        console.log('received music data:', data);
+        setMusicData(data);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -66,7 +69,7 @@ const Home: React.FC = () => {
       </button>
       <h1 className='page-title'>Músicas</h1>
 
-      <List data={albumData} clickFunction={handleClick} />
+      <List data={musicData} clickFunction={handleClick} />
       <MusicModal
         data={selectedMusic}
         openModal={openModal}
