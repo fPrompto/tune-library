@@ -8,8 +8,9 @@ import {
   DialogTitle,
 } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import AlbumList from './AlbumList';
 
-import { updateMusic } from '@/api/database';
+import { updateMusic, getAlbumData } from '@/api/database';
 
 const MusicModal = ({ openModal, setOpenModal, data }) => {
   console.log('modal data =>', data);
@@ -59,17 +60,30 @@ const MusicModal = ({ openModal, setOpenModal, data }) => {
     setOpenModal(false);
   };
 
+  const getAlbums = () => {
+    getAlbumData()
+      .then((data) => {
+        console.log('Received album data:', data);
+        setListOfAlbums(data);
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  }
+
   useEffect(() => {
     setIsLoading(true);
     setName(data.name);
     setArtist(data.artist);
     setLaunchDate(data.launch_date);
     setAlbumId(data.album_id);
-    setIsLoading(false)
+    getAlbums();
+    setIsLoading(false);
+  }, [openModal]);
 
-  }, [openModal])
-
-  return isLoading ? <div>Loading...</div> : (
+  return isLoading ? (
+    <div>Loading...</div>
+  ) : (
     <Dialog open={openModal} onClose={setOpenModal} className='relative z-10'>
       <DialogBackdrop
         transition
@@ -152,7 +166,7 @@ const MusicModal = ({ openModal, setOpenModal, data }) => {
                       </div>
                     </div>
 
-                    <div>
+                    {/* <div>
                       <label
                         htmlFor='email'
                         className='block text-sm font-medium leading-6 text-gray-900  album-modal-title'
@@ -168,7 +182,12 @@ const MusicModal = ({ openModal, setOpenModal, data }) => {
                           onChange={(e) => setLaunchDate(e.target.value)}
                         />
                       </div>
-                    </div>
+                    </div> */}
+                    <AlbumList
+                      albumList={listOfAlbums}
+                      albumId={albumId}
+                      setAlbumId={setAlbumId}
+                    />
                   </div>
                 </div>
               </div>
