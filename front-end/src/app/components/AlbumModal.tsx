@@ -14,7 +14,7 @@ import {
   isoToNormalDate,
   getCurrentDate,
 } from '@/utils/convertDate';
-import { updateAlbum } from '@/api/database';
+import { updateAlbum, createAlbum } from '@/api/database';
 
 const AlbumModal = ({ openModal, setOpenModal, data, type }) => {
   console.log('modal data =>', data);
@@ -52,12 +52,38 @@ const AlbumModal = ({ openModal, setOpenModal, data, type }) => {
       .then((data) => {
         console.log('new data:', data);
         alert('updated at =>', data.updatedAt);
+        setOpenModal(false);
       })
       .catch((error) => {
         alert(error.message);
       });
-    setOpenModal(false);
   };
+
+  const handleCreate = () => {
+    createAlbum({
+      name,
+      artist,
+      launch_date: normalDateToIso(launchDate),
+      active: true,
+    })
+      .then((data) => {
+        console.log('new data:', data);
+        setOpenModal(false);
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
+
+  const handleClick = () => {
+    if (type === UPDATE) {
+      handleUpdate();
+    }
+
+    if (type === ADD) {
+      handleCreate();
+    }
+  }
 
   const handleDel = () => {
     updateAlbum({
@@ -204,7 +230,7 @@ const AlbumModal = ({ openModal, setOpenModal, data, type }) => {
             <div className='bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6'>
               <button
                 type='button'
-                onClick={() => handleUpdate()}
+                onClick={() => handleClick()}
                 className='mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto'
               >
                 Salvar
