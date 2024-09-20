@@ -21,11 +21,12 @@ const AlbumList: React.FC<AlbumListProps> = ({
 }) => {
   const [selected, setSelected] = useState<AlbumI>(DEFAULT_ALBUM_DATA);
 
-  const setSelectedAlbum = () => {
-    const findAlbum = albumList.find((item) => item.id === selected.id);
+  const setSelectedAlbum = (string: string): void => {
+    const findAlbum = albumList.find((item) => item.name === string);
     if (findAlbum) {
       setSelected(findAlbum);
       setAlbumId(Number(findAlbum.id));
+      console.log('selected album =>', findAlbum);
     }
   };
 
@@ -70,11 +71,6 @@ const AlbumList: React.FC<AlbumListProps> = ({
               className='group relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 data-[focus]:bg-indigo-600 data-[focus]:text-white'
             >
               <div className='flex items-center'>
-                {/* <img
-                  alt=''
-                  src={person.avatar}
-                  className='h-5 w-5 flex-shrink-0 rounded-full'
-                /> */}
                 <span className='ml-3 block truncate font-normal group-data-[selected]:font-semibold'>
                   {al.name}
                 </span>
