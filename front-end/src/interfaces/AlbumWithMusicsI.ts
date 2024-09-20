@@ -1,7 +1,7 @@
 import MusicI from "./MusicI";
 
 interface AlbumWithMusicsI {
-  id?: string;
+  id?: number;
   name: string;
   artist: string;
   launch_date: string;

@@ -1,9 +1,9 @@
 interface MusicI {
-  id?: string;
+  id?: number;
   name: string;
   artist: string;
   launch_date: string;
-  album_id: string;
+  album_id: number;
   active: boolean;
 }
 

@@ -1,5 +1,5 @@
 interface AlbumI {
-  id?: string;
+  id?: number;
   name: string;
   artist: string;
   launch_date: string;

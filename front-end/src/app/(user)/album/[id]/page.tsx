@@ -3,13 +3,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { getAlbumDataById } from '@/api/database';
+
 import Loading from '@/app/components/Loading';
 import AlbumModal from '@/app/components/AlbumModal';
 
-const AlbumDetails: React.FC = () => {
-  const [albumData, setAlbumData] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+import AlbumWithMusicsI from '@/interfaces/AlbumWithMusicsI';
+import { DEFAULT_ALBUM_DATA } from '@/utils/strings';
 
+const AlbumDetails: React.FC = () => {
+  const [albumData, setAlbumData] = useState<AlbumWithMusicsI>(DEFAULT_ALBUM_DATA);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [openModal, setOpenModal] = useState(false);
 
   const params = useParams<{ id: string }>();
@@ -27,9 +30,9 @@ const AlbumDetails: React.FC = () => {
       .catch((error) => {
         alert(error.message);
       });
-  }, []);
+  }, [id, params]);
 
-  const formatDate = (date) => {
+  const formatDate = (date: string): string => {
     const isoDateString = date;
     const dateObject = new Date(isoDateString);
     const formattedDate = dateObject.toLocaleDateString('pt-BR', {
@@ -41,7 +44,7 @@ const AlbumDetails: React.FC = () => {
     return formattedDate;
   };
 
-  const handleModal = () => {
+  const handleModal = (): void => {
     setOpenModal(true);
   };
 
