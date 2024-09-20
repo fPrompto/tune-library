@@ -1,12 +1,8 @@
-interface AlbumMusic {
-  id: string;
-  name: string;
-  artist: string;
-  launch_date: string;
-}
+import AlbumI from "./AlbumI";
+import MusicI from "./MusicI";
 
 interface ListProps {
-  data: AlbumMusic[];
+  data: AlbumI[] | MusicI[];
   clickFunction: (e: React.MouseEvent<HTMLUListElement>) => void;
 }
 

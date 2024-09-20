@@ -23,7 +23,7 @@ const List: React.FC<ListProps> = ({ data, clickFunction }) => {
           return (
             <li
               key={a.name}
-              id={a.id}
+              id={String(a.id)}
               className='flex justify-between gap-x-6 py-5'
             >
               <div className='flex min-w-0 gap-x-4'>
