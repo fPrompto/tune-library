@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogBackdrop,
@@ -15,18 +15,20 @@ import {
   getCurrentDate,
 } from '@/utils/convertDate';
 import { updateAlbum, createAlbum } from '@/api/database';
+import AlbumI from '@/interfaces/AlbumI';
+import AlbumModalProps from '@/interfaces/AlbumModalProps';
 
-const AlbumModal = ({ openModal, setOpenModal, data, type }) => {
+const AlbumModal: React.FC<AlbumModalProps> = ({ openModal, setOpenModal, data, type }) => {
   console.log('modal data =>', data);
 
   const normalDate = isoToNormalDate(data.launch_date);
 
-  const [name, setName] = useState(data.name);
-  const [artist, setArtist] = useState(data.artist);
-  const [launchDate, setLaunchDate] = useState(normalDate);
-  const [isLoading, setIsLoading] = useState(false);
+  const [name, setName] = useState<string>(data.name);
+  const [artist, setArtist] = useState<string>(data.artist);
+  const [launchDate, setLaunchDate] = useState<string>(normalDate);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const [modalTitle, setModalTitle] = useState('');
+  const [modalTitle, setModalTitle] = useState<'Editar Álbum' | 'Adicionar Álbum'>('Editar Álbum');
 
   const UPDATE = 'update';
   const ADD = 'add';
@@ -51,7 +53,6 @@ const AlbumModal = ({ openModal, setOpenModal, data, type }) => {
     })
       .then((data) => {
         console.log('new data:', data);
-        alert('updated at =>', data.updatedAt);
         setOpenModal(false);
       })
       .catch((error) => {
@@ -95,7 +96,6 @@ const AlbumModal = ({ openModal, setOpenModal, data, type }) => {
     })
       .then((data) => {
         console.log('new data:', data);
-        alert('updated at =>', data.updatedAt);
       })
       .catch((error) => {
         alert(error.message);
