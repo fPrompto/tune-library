@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogBackdrop,
@@ -9,13 +9,38 @@ import {
 } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
+import { updateAlbum } from '@/api/database';
+
 const AlbumModal = ({ openModal, data }) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   console.log('modal data =>', data);
 
   const [name, setName] = useState(data.name);
   const [artist, setArtist] = useState(data.artist);
   const [launchDate, setLaunchDate] = useState(data.launch_date);
+
+  const handleUpdate = () => {
+    updateAlbum({
+      id: data.id,
+      name,
+      artist,
+      launch_date: launchDate,
+      active: true,
+    })
+      .then((data) => {
+        console.log('new data:', data);
+        alert(data)
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
+
+  const handleDel = () => {};
+
+  useEffect(() => {
+    setOpen(openModal);
+  }, openModal);
 
   return (
     <Dialog open={open} onClose={setOpen} className='relative z-10'>
@@ -106,7 +131,7 @@ const AlbumModal = ({ openModal, data }) => {
             <div className='bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6'>
               <button
                 type='button'
-                onClick={() => setOpen(false)}
+                onClick={() => handleUpdate()}
                 className='mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto'
               >
                 Salvar
@@ -114,7 +139,7 @@ const AlbumModal = ({ openModal, data }) => {
               <button
                 type='button'
                 data-autofocus
-                onClick={() => setOpen(false)}
+                onClick={() => handleDel()}
                 className='inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto save-button'
               >
                 Desativar
