@@ -3,17 +3,12 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-// import Image from 'next/image';
 import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
 } from '@headlessui/react';
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 function classNames(
   ...classes: (string | boolean | null | undefined)[]
@@ -24,26 +19,24 @@ function classNames(
 const Header: React.FC = () => {
   const [currentAlbum, setCurrentAlbum] = useState(true);
   const [currentMusic, setCurrentMusic] = useState(false);
-  
+
   const router = useRouter();
-  
+
   const clickAlbum = () => {
     router.push('/');
     setCurrentMusic(false);
     setCurrentAlbum(true);
   };
-  
+
   const clickMusic = () => {
     router.push('/musics');
     setCurrentAlbum(false);
     setCurrentMusic(true);
   };
-  
+
   const navigation = [
     { name: 'Álbuns', onClick: clickAlbum, current: currentAlbum },
     { name: 'Músicas', onClick: clickMusic, current: currentMusic },
-    // { name: 'Projects', href: '#', current: false },
-    // { name: 'Calendar', href: '#', current: false },
   ];
 
   return (
@@ -72,14 +65,6 @@ const Header: React.FC = () => {
                 src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500'
                 className='h-8 w-auto'
               />
-              {/* <Image
-                src='https://via.placeholder.com/150'
-                alt='Your Company'
-                className='h-8 w-auto'
-                width={180}
-                height={38}
-                priority
-              /> */}
             </div>
             <div className='hidden sm:ml-6 sm:block'>
               <div className='flex space-x-4'>
@@ -102,58 +87,6 @@ const Header: React.FC = () => {
             </div>
           </div>
           <div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
-            {/* <button
-              type='button'
-              className='relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'
-            >
-              <span className='absolute -inset-1.5' />
-              <span className='sr-only'>View notifications</span>
-              <BellIcon aria-hidden='true' className='h-6 w-6' />
-            </button> */}
-
-            {/* Profile dropdown */}
-            {/* <Menu as='div' className='relative ml-3'>
-              <div>
-                <MenuButton className='relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
-                  <span className='absolute -inset-1.5' />
-                  <span className='sr-only'>Open user menu</span>
-                  <img
-                    alt=''
-                    src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                    className='h-8 w-8 rounded-full'
-                  />
-                </MenuButton>
-              </div>
-              <MenuItems
-                transition
-                className='absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in'
-              >
-                <MenuItem>
-                  <a
-                    href='#'
-                    className='block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100'
-                  >
-                    Your Profile
-                  </a>
-                </MenuItem>
-                <MenuItem>
-                  <a
-                    href='#'
-                    className='block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100'
-                  >
-                    Settings
-                  </a>
-                </MenuItem>
-                <MenuItem>
-                  <a
-                    href='#'
-                    className='block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100'
-                  >
-                    Sign out
-                  </a>
-                </MenuItem>
-              </MenuItems>
-            </Menu> */}
           </div>
         </div>
       </div>
