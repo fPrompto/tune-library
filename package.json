@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install:frontend": "cd ./front-end && npm install",
+    "install:backend": "cd ./back-end && npm install",
+    "install:all": "npm run install:frontend && npm run install:backend",
+    "db:start": "cd ./back-end && npm run db:start",
+    "start:frontend": "cd ./front-end && npm run dev",
+    "start:backend": "cd ./back-end && npm run start"
   },
   "author": "",
   "license": "ISC",
