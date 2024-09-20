@@ -11,17 +11,24 @@ import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import AlbumList from './AlbumList';
 
 import { updateMusic, getAlbumData, createMusic } from '@/api/database';
+import {
+  normalDateToIso,
+  isoToNormalDate,
+  getCurrentDate,
+} from '@/utils/convertDate';
 
 const MusicModal = ({ openModal, setOpenModal, data, type }) => {
   console.log('modal data =>', data);
 
+  const normalDate = isoToNormalDate(data.launch_date);
+
   const [name, setName] = useState(data.name);
   const [artist, setArtist] = useState(data.artist);
-  const [launchDate, setLaunchDate] = useState(data.launch_date);
+  const [launchDate, setLaunchDate] = useState(normalDate);
   const [albumId, setAlbumId] = useState(data.album_id);
   const [listOfAlbums, setListOfAlbums] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const [modalTitle, setModalTitle] = useState('');
 
   const UPDATE = 'update';
@@ -42,7 +49,7 @@ const MusicModal = ({ openModal, setOpenModal, data, type }) => {
       id: data.id,
       name,
       artist,
-      launch_date: launchDate,
+      launch_date: normalDateToIso(launchDate),
       album_id: albumId,
       active: true,
     })
@@ -61,7 +68,7 @@ const MusicModal = ({ openModal, setOpenModal, data, type }) => {
       id: data.id,
       name,
       artist,
-      launch_date: launchDate,
+      launch_date: normalDateToIso(launchDate),
       album_id: albumId,
       active: true,
     })
@@ -136,7 +143,7 @@ const MusicModal = ({ openModal, setOpenModal, data, type }) => {
       setIsLoading(true);
       setName(data.name);
       setArtist(data.artist);
-      setLaunchDate(data.launch_date);
+      setLaunchDate(normalDate);
       setAlbumId(data.album_id);
       getAlbums();
       setTitle();
@@ -147,7 +154,7 @@ const MusicModal = ({ openModal, setOpenModal, data, type }) => {
       setIsLoading(true);
       setName('');
       setArtist('');
-      setLaunchDate('');
+      setLaunchDate(getCurrentDate());
       setAlbumId(1);
       getAlbums();
       setTitle();

@@ -9,15 +9,22 @@ import {
 } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
+import {
+  normalDateToIso,
+  isoToNormalDate,
+  getCurrentDate,
+} from '@/utils/convertDate';
 import { updateAlbum } from '@/api/database';
 
 const AlbumModal = ({ openModal, setOpenModal, data, type }) => {
   console.log('modal data =>', data);
 
+  const normalDate = isoToNormalDate(data.launch_date);
+
   const [name, setName] = useState(data.name);
   const [artist, setArtist] = useState(data.artist);
-  const [launchDate, setLaunchDate] = useState(data.launch_date);
-    const [isLoading, setIsLoading] = useState(false);
+  const [launchDate, setLaunchDate] = useState(normalDate);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [modalTitle, setModalTitle] = useState('');
 
@@ -39,7 +46,7 @@ const AlbumModal = ({ openModal, setOpenModal, data, type }) => {
       id: data.id,
       name,
       artist,
-      launch_date: launchDate,
+      launch_date: normalDateToIso(launchDate),
       active: true,
     })
       .then((data) => {
@@ -91,7 +98,7 @@ const AlbumModal = ({ openModal, setOpenModal, data, type }) => {
       setIsLoading(true);
       setName(data.name);
       setArtist(data.artist);
-      setLaunchDate(data.launch_date);
+      setLaunchDate(normalDate);
       setTitle();
       setIsLoading(false);
     }
@@ -100,14 +107,15 @@ const AlbumModal = ({ openModal, setOpenModal, data, type }) => {
       setIsLoading(true);
       setName('');
       setArtist('');
-      setLaunchDate('');
+      setLaunchDate(getCurrentDate());
       setTitle();
-            setIsLoading(false);
-
+      setIsLoading(false);
     }
   }, [openModal]);
 
-  return isLoading ? <div>Loading...</div> : (
+  return isLoading ? (
+    <div>Loading...</div>
+  ) : (
     <Dialog open={openModal} onClose={setOpenModal} className='relative z-10'>
       <DialogBackdrop
         transition
@@ -201,7 +209,7 @@ const AlbumModal = ({ openModal, setOpenModal, data, type }) => {
               >
                 Salvar
               </button>
-              { disableButton() }
+              {disableButton()}
             </div>
           </DialogPanel>
         </div>
