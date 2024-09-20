@@ -24,7 +24,7 @@ module.exports = {
         id: 2,
         name: 'The Fame',
         artist: 'Lady Gaga',
-        launch_date: new Date('2008-08-19');
+        launch_date: new Date('2008-08-19'),
         active: true,
       },
       {
