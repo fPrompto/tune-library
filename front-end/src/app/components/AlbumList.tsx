@@ -25,7 +25,7 @@ const AlbumList: React.FC<AlbumListProps> = ({
     const findAlbum = albumList.find((item) => item.id === selected.id);
     if (findAlbum) {
       setSelected(findAlbum);
-      setAlbumId(String(findAlbum.id));
+      setAlbumId(Number(findAlbum.id));
     }
   };
 

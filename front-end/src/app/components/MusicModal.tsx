@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Dialog,
   DialogBackdrop,
@@ -16,25 +16,28 @@ import {
   isoToNormalDate,
   getCurrentDate,
 } from '@/utils/convertDate';
+import { DEFAULT_ALBUM_LIST } from '@/utils/strings';
+import MusicModalProps from '@/interfaces/MusicModalProps';
+import AlbumI from '@/interfaces/AlbumI'
 
-const MusicModal = ({ openModal, setOpenModal, data, type }) => {
+const MusicModal: React.FC<MusicModalProps> = ({ openModal, setOpenModal, data, type }) => {
   console.log('modal data =>', data);
 
   const normalDate = isoToNormalDate(data.launch_date);
 
-  const [name, setName] = useState(data.name);
-  const [artist, setArtist] = useState(data.artist);
-  const [launchDate, setLaunchDate] = useState(normalDate);
-  const [albumId, setAlbumId] = useState(data.album_id);
-  const [listOfAlbums, setListOfAlbums] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [name, setName] = useState<string>(data.name);
+  const [artist, setArtist] = useState<string>(data.artist);
+  const [launchDate, setLaunchDate] = useState<string>(normalDate);
+  const [albumId, setAlbumId] = useState<number>(Number(data.album_id));
+  const [albumList, setAlbumList] = useState<AlbumI[]>(DEFAULT_ALBUM_LIST);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [modalTitle, setModalTitle] = useState('');
 
   const UPDATE = 'update';
   const ADD = 'add';
 
-  const setTitle = () => {
+  const setTitle = (): void => {
     if (type === UPDATE) {
       setModalTitle('Editar Música');
     }
@@ -44,18 +47,17 @@ const MusicModal = ({ openModal, setOpenModal, data, type }) => {
     }
   };
 
-  const handleUpdate = () => {
+  const handleUpdate = (): void => {
     updateMusic({
       id: data.id,
       name,
       artist,
       launch_date: normalDateToIso(launchDate),
-      album_id: albumId,
+      album_id: Number(albumId),
       active: true,
     })
       .then((data) => {
         console.log('new data:', data);
-        alert('updated at =>', data.updatedAt);
       })
       .catch((error) => {
         alert(error.message);
@@ -63,18 +65,17 @@ const MusicModal = ({ openModal, setOpenModal, data, type }) => {
     setOpenModal(false);
   };
 
-  const handleCreate = () => {
+  const handleCreate = (): void => {
     createMusic({
       id: data.id,
       name,
       artist,
       launch_date: normalDateToIso(launchDate),
-      album_id: albumId,
+      album_id: Number(albumId),
       active: true,
     })
       .then((data) => {
         console.log('new data:', data);
-        alert('updated at =>', data.updatedAt);
       })
       .catch((error) => {
         alert(error.message);
@@ -82,7 +83,7 @@ const MusicModal = ({ openModal, setOpenModal, data, type }) => {
     setOpenModal(false);
   };
 
-  const handleSave = () => {
+  const handleSave = (): void => {
     if (type === UPDATE) {
       handleUpdate();
     }
@@ -92,7 +93,7 @@ const MusicModal = ({ openModal, setOpenModal, data, type }) => {
     }
   };
 
-  const handleDel = () => {
+  const handleDel = (): void => {
     updateMusic({
       id: data.id,
       name: data.name,
@@ -103,7 +104,6 @@ const MusicModal = ({ openModal, setOpenModal, data, type }) => {
     })
       .then((data) => {
         console.log('new data:', data);
-        alert('updated at =>', data.updatedAt);
       })
       .catch((error) => {
         alert(error.message);
@@ -111,18 +111,18 @@ const MusicModal = ({ openModal, setOpenModal, data, type }) => {
     setOpenModal(false);
   };
 
-  const getAlbums = () => {
+  const getAlbums = (): void => {
     getAlbumData()
       .then((data) => {
         console.log('Received album data:', data);
-        setListOfAlbums(data);
+        setAlbumList(data);
       })
       .catch((error) => {
         alert(error.message);
       });
   };
 
-  const disableButton = () => {
+  const disableButton = (): JSX.Element => {
     if (type === UPDATE) {
       return (
         <button
@@ -160,6 +160,7 @@ const MusicModal = ({ openModal, setOpenModal, data, type }) => {
       setTitle();
       setIsLoading(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openModal]);
 
   return isLoading ? (
@@ -265,8 +266,8 @@ const MusicModal = ({ openModal, setOpenModal, data, type }) => {
                       </div>
                     </div> */}
                     <AlbumList
-                      albumList={listOfAlbums}
-                      albumId={albumId}
+                      albumList={albumList}
+                      albumId={String(albumId)}
                       setAlbumId={setAlbumId}
                     />
                   </div>

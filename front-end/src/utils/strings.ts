@@ -27,6 +27,28 @@ export const DEFAULT_ALBUM_DATA = {
   ],
 };
 
+export const DEFAULT_ALBUM_LIST = [
+  {
+    id: 1,
+    name: LOADING,
+    artist: LOADING,
+    launch_date: DATE,
+    active: true,
+    createdAt: DATE,
+    updatedAt: DATE,
+    musics: [
+      {
+        id: 11,
+        name: LOADING,
+        artist: LOADING,
+        launch_date: DATE,
+        album_id: 1,
+        active: true,
+      },
+    ],
+  },
+];;
+
 export const DEFAULT_MUSIC_DATA = [
   {
     id: 1,
