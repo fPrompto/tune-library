@@ -28,7 +28,7 @@ body {
 
 .page-title {
   font-size: 40px;
-  margin-left: 40px;
+  /* margin-left: 40px; */
   margin-top: 26px;
 }
 
@@ -66,4 +66,16 @@ body {
 
 .album-list-input {
   margin-top: 10px;
+}
+
+.edit-album-button {
+  float: right;
+}
+
+.content-div {
+  margin: 15px 40px 15px 40px;
+}
+
+.album-div {
+  margin: 15px 40px 15px 40px;
 }

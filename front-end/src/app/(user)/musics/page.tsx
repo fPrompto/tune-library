@@ -56,15 +56,16 @@ const Home: React.FC = () => {
   return isLoading ? (
     <Loading />
   ) : (
-    <>
-      <h1 className='page-title'>Músicas</h1>
+    <div className='content-div'>
       <button
         type='button'
         onClick={() => handleModal()}
-        className='mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto'
+        className='mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto edit-album-button add-button'
       >
         Criar
       </button>
+      <h1 className='page-title'>Músicas</h1>
+
       <List data={albumData} clickFunction={handleClick} />
       <MusicModal
         data={selectedMusic}
@@ -72,7 +73,7 @@ const Home: React.FC = () => {
         setOpenModal={setOpenModal}
         type={modalType}
       />
-    </>
+    </div>
   );
 };
 

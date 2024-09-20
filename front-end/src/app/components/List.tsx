@@ -3,8 +3,6 @@
 import React from 'react';
 import ListProps from '@/interfaces/ListProps';
 
-import '@/styles/List.css';
-
 const List: React.FC<ListProps> = ({ data, clickFunction }) => {
   return (
     <div className='list-div'>
