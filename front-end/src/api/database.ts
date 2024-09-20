@@ -1,7 +1,10 @@
 import $ from 'jquery';
 import { BACKEND_URL } from '@/config/config';
+import AlbumI from '@/interfaces/AlbumI';
+import MusicI from '@/interfaces/MusicI';
+import AlbumWithMusicsI from '@/interfaces/AlbumWithMusicsI';
 
-export const getAlbumData = () => {
+export const getAlbumData = (): Promise<AlbumI[]> => {
   return new Promise((resolve, reject) => {
     $.ajax({
       url: `${BACKEND_URL}/album/find/active`,
@@ -19,7 +22,7 @@ export const getAlbumData = () => {
   });
 };
 
-export const getAlbumDataById = (id: string) => {
+export const getAlbumDataById = (id: string): Promise<AlbumWithMusicsI> => {
   return new Promise((resolve, reject) => {
     $.ajax({
       url: `${BACKEND_URL}/album/find/id/${id}`,
@@ -37,7 +40,7 @@ export const getAlbumDataById = (id: string) => {
   });
 };
 
-export const getAllMusics = () => {
+export const getAllMusics = (): Promise<MusicI[]> => {
   return new Promise((resolve, reject) => {
     $.ajax({
       url: `${BACKEND_URL}/music/find/all`,
@@ -55,14 +58,14 @@ export const getAllMusics = () => {
   });
 };
 
-export const updateAlbum = ({ id, name, artist, launch_date, active }) => {
+export const updateAlbum = (albumData: AlbumI): Promise<AlbumI> => {
   return new Promise((resolve, reject) => {
     $.ajax({
       url: `${BACKEND_URL}/album/update`,
       type: 'PUT',
       dataType: 'json',
       contentType: 'application/json',
-      data: JSON.stringify({ id, name, artist, launch_date, active }),
+      data: JSON.stringify(albumData),
       success: function (response) {
         console.log('data: ', response);
         resolve(response);
@@ -75,7 +78,7 @@ export const updateAlbum = ({ id, name, artist, launch_date, active }) => {
   });
 };
 
-export const getMusicById = (id: string) => {
+export const getMusicById = (id: string): Promise<MusicI> => {
   return new Promise((resolve, reject) => {
     $.ajax({
       url: `${BACKEND_URL}/music/find/id/${id}`,
@@ -93,21 +96,14 @@ export const getMusicById = (id: string) => {
   });
 };
 
-export const updateMusic = ({
-  id,
-  name,
-  artist,
-  launch_date,
-  album_id,
-  active,
-}) => {
+export const updateMusic = (musicData: MusicI): Promise<MusicI> => {
   return new Promise((resolve, reject) => {
     $.ajax({
       url: `${BACKEND_URL}/music/update`,
       type: 'PUT',
       dataType: 'json',
       contentType: 'application/json',
-      data: JSON.stringify({ id, name, artist, launch_date, album_id, active }),
+      data: JSON.stringify(musicData),
       success: function (response) {
         console.log('data: ', response);
         resolve(response);
@@ -120,21 +116,14 @@ export const updateMusic = ({
   });
 };
 
-export const createMusic = ({
-  id,
-  name,
-  artist,
-  launch_date,
-  album_id,
-  active,
-}) => {
+export const createMusic = (musicData: MusicI): Promise<MusicI> => {
   return new Promise((resolve, reject) => {
     $.ajax({
       url: `${BACKEND_URL}/music/create`,
       type: 'POST',
       dataType: 'json',
       contentType: 'application/json',
-      data: JSON.stringify({ id, name, artist, launch_date, album_id, active }),
+      data: JSON.stringify(musicData),
       success: function (response) {
         console.log('data: ', response);
         resolve(response);
@@ -147,20 +136,14 @@ export const createMusic = ({
   });
 };
 
-export const createAlbum = ({
-  id,
-  name,
-  artist,
-  launch_date,
-  active,
-}) => {
+export const createAlbum = (albumData: AlbumI): Promise<AlbumI> => {
   return new Promise((resolve, reject) => {
     $.ajax({
       url: `${BACKEND_URL}/album/create`,
       type: 'POST',
       dataType: 'json',
       contentType: 'application/json',
-      data: JSON.stringify({ name, artist, launch_date, active }),
+      data: JSON.stringify(albumData),
       success: function (response) {
         console.log('data: ', response);
         resolve(response);
