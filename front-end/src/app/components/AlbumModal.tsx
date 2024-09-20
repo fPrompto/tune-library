@@ -11,12 +11,28 @@ import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
 import { updateAlbum } from '@/api/database';
 
-const AlbumModal = ({ openModal, setOpenModal, data }) => {
+const AlbumModal = ({ openModal, setOpenModal, data, type }) => {
   console.log('modal data =>', data);
 
   const [name, setName] = useState(data.name);
   const [artist, setArtist] = useState(data.artist);
   const [launchDate, setLaunchDate] = useState(data.launch_date);
+    const [isLoading, setIsLoading] = useState(false);
+
+  const [modalTitle, setModalTitle] = useState('');
+
+  const UPDATE = 'update';
+  const ADD = 'add';
+
+  const setTitle = () => {
+    if (type === UPDATE) {
+      setModalTitle('Editar Álbum');
+    }
+
+    if (type === ADD) {
+      setModalTitle('Adicionar Álbum');
+    }
+  };
 
   const handleUpdate = () => {
     updateAlbum({
@@ -54,7 +70,44 @@ const AlbumModal = ({ openModal, setOpenModal, data }) => {
     setOpenModal(false);
   };
 
-  return (
+  const disableButton = () => {
+    if (type === UPDATE) {
+      return (
+        <button
+          type='button'
+          data-autofocus
+          onClick={() => handleDel()}
+          className='inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto save-button'
+        >
+          Desativar
+        </button>
+      );
+    }
+    return <div></div>;
+  };
+
+  useEffect(() => {
+    if (type === UPDATE) {
+      setIsLoading(true);
+      setName(data.name);
+      setArtist(data.artist);
+      setLaunchDate(data.launch_date);
+      setTitle();
+      setIsLoading(false);
+    }
+
+    if (type === ADD) {
+      setIsLoading(true);
+      setName('');
+      setArtist('');
+      setLaunchDate('');
+      setTitle();
+            setIsLoading(false);
+
+    }
+  }, [openModal]);
+
+  return isLoading ? <div>Loading...</div> : (
     <Dialog open={openModal} onClose={setOpenModal} className='relative z-10'>
       <DialogBackdrop
         transition
@@ -80,7 +133,7 @@ const AlbumModal = ({ openModal, setOpenModal, data }) => {
                     as='h3'
                     className='text-base font-semibold leading-6 text-gray-900 album-modal-title'
                   >
-                    Editar Álbum
+                    {modalTitle}
                   </DialogTitle>
                   <div className='mt-2 modal-div'>
                     <div>
@@ -148,14 +201,7 @@ const AlbumModal = ({ openModal, setOpenModal, data }) => {
               >
                 Salvar
               </button>
-              <button
-                type='button'
-                data-autofocus
-                onClick={() => handleDel()}
-                className='inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto save-button'
-              >
-                Desativar
-              </button>
+              { disableButton() }
             </div>
           </DialogPanel>
         </div>

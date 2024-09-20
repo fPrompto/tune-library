@@ -5,12 +5,23 @@ import { useRouter } from 'next/navigation';
 import { getAlbumData } from '@/api/database';
 import Loading from './components/Loading';
 import List from './components/List';
+import AlbumModal from './components/AlbumModal';
 
 import '../styles/Home.css';
+import { FaceSmileIcon } from '@heroicons/react/16/solid';
 
 const Home: React.FC = () => {
   const [albumData, setAlbumData] = useState([{}]);
   const [isLoading, setIsLoading] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
+
+  const modalType = 'add';
+
+  const emptyData = {
+    name: '',
+    artist: '',
+    launchDate: '',
+  };
 
   const router = useRouter();
 
@@ -43,6 +54,19 @@ const Home: React.FC = () => {
     <Loading />
   ) : (
     <>
+      <AlbumModal
+        data={emptyData}
+        type={modalType}
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+      />
+      <button
+        type='button'
+        onClick={() => setOpenModal(true)}
+        className='mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto'
+      >
+        Criar
+      </button>
       <h1 className='page-title'>Álbuns</h1>
       <List data={albumData} clickFunction={handleClick} />
     </>

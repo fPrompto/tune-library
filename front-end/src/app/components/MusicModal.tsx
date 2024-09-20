@@ -21,11 +21,11 @@ const MusicModal = ({ openModal, setOpenModal, data, type }) => {
   const [albumId, setAlbumId] = useState(data.album_id);
   const [listOfAlbums, setListOfAlbums] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  
+  const [modalTitle, setModalTitle] = useState('');
 
   const UPDATE = 'update';
   const ADD = 'add';
-
-  const [modalTitle, setModalTitle] = useState('');
 
   const setTitle = () => {
     if (type === UPDATE) {

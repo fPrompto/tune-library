@@ -32,7 +32,7 @@ const AlbumDetails: React.FC = () => {
   }, []);
 
   const formatDate = (date) => {
-    const isoDateString = date
+    const isoDateString = date;
     const dateObject = new Date(isoDateString);
     const formattedDate = dateObject.toLocaleDateString('pt-BR', {
       year: 'numeric',
@@ -112,7 +112,12 @@ const AlbumDetails: React.FC = () => {
           </div>
         </dl>
       </div>
-      <AlbumModal data={albumData} openModal={openModal} setOpenModal={setOpenModal} />
+      <AlbumModal
+        data={albumData}
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        type='update'
+      />
     </div>
   );
 };
