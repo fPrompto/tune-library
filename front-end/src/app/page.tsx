@@ -7,12 +7,13 @@ import Loading from './components/Loading';
 import List from './components/List';
 import AlbumModal from './components/AlbumModal';
 
-import { FaceSmileIcon } from '@heroicons/react/16/solid';
+import { DEFAULT_ALBUM_LIST } from '@/utils/strings';
+import AlbumI from '../interfaces/AlbumI';
 
 const Home: React.FC = () => {
-  const [albumData, setAlbumData] = useState([{}]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [openModal, setOpenModal] = useState(false);
+  const [albumData, setAlbumData] = useState<AlbumI[]>(DEFAULT_ALBUM_LIST);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [openModal, setOpenModal] = useState<boolean>(false);
 
   const modalType = 'add';
 
@@ -20,6 +21,8 @@ const Home: React.FC = () => {
     name: '',
     artist: '',
     launchDate: '',
+    launch_date: '',
+    active: true,
   };
 
   const router = useRouter();
