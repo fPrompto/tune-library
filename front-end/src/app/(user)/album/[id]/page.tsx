@@ -12,7 +12,7 @@ const AlbumDetails: React.FC = () => {
   const [albumData, setAlbumData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
 
   const params = useParams<{ id: string }>();
   const { id } = params;
@@ -43,12 +43,21 @@ const AlbumDetails: React.FC = () => {
     return formattedDate;
   };
 
+  const handleModal = () => {
+    setOpenModal(true);
+  };
+
   return isLoading ? (
     <Loading />
   ) : (
     <div className='album-div'>
-        <AlbumModal data={albumData} openModal={openModal} />
-
+      <button
+        type='button'
+        onClick={() => handleModal()}
+        className='mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto'
+      >
+        Editar
+      </button>
       <div className='px-4 sm:px-0'>
         <h3 className='text-base font-semibold leading-7 text-gray-900 text-white'>
           {albumData.name}
@@ -103,6 +112,7 @@ const AlbumDetails: React.FC = () => {
           </div>
         </dl>
       </div>
+      <AlbumModal data={albumData} openModal={openModal} setOpenModal={setOpenModal} />
     </div>
   );
 };
