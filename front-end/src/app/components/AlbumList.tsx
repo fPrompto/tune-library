@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Label,
   Listbox,
@@ -8,25 +8,33 @@ import {
   ListboxOption,
   ListboxOptions,
 } from '@headlessui/react';
-import {
-  CheckIcon,
-  ChevronUpDownIcon,
-  ListBulletIcon,
-} from '@heroicons/react/20/solid';
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 
-const AlbumList = ({ albumList, albumId, setAlbumId }) => {
-  const [selected, setSelected] = useState({});
+import AlbumI from '@/interfaces/AlbumI';
+import AlbumListProps from '@/interfaces/AlbumListProps';
+import { DEFAULT_ALBUM_DATA } from '@/utils/strings';
+
+const AlbumList: React.FC<AlbumListProps> = ({
+  albumList,
+  albumId,
+  setAlbumId,
+}) => {
+  const [selected, setSelected] = useState<AlbumI>(DEFAULT_ALBUM_DATA);
 
   const setSelectedAlbum = () => {
     const findAlbum = albumList.find((item) => item.id === selected.id);
-    setSelected(findAlbum);
-    setAlbumId(findAlbum.id);
+    if (findAlbum) {
+      setSelected(findAlbum);
+      setAlbumId(String(findAlbum.id));
+    }
   };
 
   useEffect(() => {
-    const findAlbum = albumList.find((item) => item.id === albumId);
-    setSelected(findAlbum);
-  }, [albumId])
+    const findAlbum = albumList.find((item) => String(item.id) === albumId);
+    if (findAlbum) {
+      setSelected(findAlbum);
+    }
+  }, [albumId, albumList]);
 
   return (
     <Listbox value={selected} onChange={setSelectedAlbum}>
