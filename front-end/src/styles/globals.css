@@ -37,6 +37,29 @@ body {
 }
 
 .menu-button {
-  float:right;
+  float: right;
   margin-right: 30px;
+}
+
+.save-button {
+  margin-right: 15px;
+}
+
+.modal-div {
+  width: 370px;
+  margin: auto;
+  margin-top: 25px;
+  margin-bottom: 30px;
+}
+
+/* .album-modal-title {
+  margin-top: -43px;
+} */
+
+.album-modal-title {
+  margin-top: 15px;
+}
+
+.album-modal-input {
+  padding-left: 11px;
 }

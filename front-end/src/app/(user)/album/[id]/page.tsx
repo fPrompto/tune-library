@@ -4,12 +4,15 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { getAlbumDataById } from '@/api/database';
 import Loading from '@/app/components/Loading';
+import AlbumModal from '@/app/components/AlbumModal';
 
 import '@/styles/AlbumDetails.css';
 
 const AlbumDetails: React.FC = () => {
   const [albumData, setAlbumData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+
+  const [openModal, setOpenModal] = useState(false);
 
   const params = useParams<{ id: string }>();
   const { id } = params;
@@ -44,6 +47,8 @@ const AlbumDetails: React.FC = () => {
     <Loading />
   ) : (
     <div className='album-div'>
+      <AlbumModal data={albumData}/>
+
       <div className='px-4 sm:px-0'>
         <h3 className='text-base font-semibold leading-7 text-gray-900 text-white'>
           {albumData.name}
