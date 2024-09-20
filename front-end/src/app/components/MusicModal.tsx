@@ -10,9 +10,9 @@ import {
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import AlbumList from './AlbumList';
 
-import { updateMusic, getAlbumData } from '@/api/database';
+import { updateMusic, getAlbumData, createMusic } from '@/api/database';
 
-const MusicModal = ({ openModal, setOpenModal, data }) => {
+const MusicModal = ({ openModal, setOpenModal, data, type }) => {
   console.log('modal data =>', data);
 
   const [name, setName] = useState(data.name);
@@ -21,6 +21,21 @@ const MusicModal = ({ openModal, setOpenModal, data }) => {
   const [albumId, setAlbumId] = useState(data.album_id);
   const [listOfAlbums, setListOfAlbums] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const UPDATE = 'update';
+  const ADD = 'add';
+
+  const [modalTitle, setModalTitle] = useState('');
+
+  const setTitle = () => {
+    if (type === UPDATE) {
+      setModalTitle('Editar Música');
+    }
+
+    if (type === ADD) {
+      setModalTitle('Adicionar Música');
+    }
+  };
 
   const handleUpdate = () => {
     updateMusic({
@@ -39,6 +54,35 @@ const MusicModal = ({ openModal, setOpenModal, data }) => {
         alert(error.message);
       });
     setOpenModal(false);
+  };
+
+  const handleCreate = () => {
+    createMusic({
+      id: data.id,
+      name,
+      artist,
+      launch_date: launchDate,
+      album_id: albumId,
+      active: true,
+    })
+      .then((data) => {
+        console.log('new data:', data);
+        alert('updated at =>', data.updatedAt);
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+    setOpenModal(false);
+  };
+
+  const handleSave = () => {
+    if (type === UPDATE) {
+      handleUpdate();
+    }
+
+    if (type === ADD) {
+      handleCreate();
+    }
   };
 
   const handleDel = () => {
@@ -69,16 +113,46 @@ const MusicModal = ({ openModal, setOpenModal, data }) => {
       .catch((error) => {
         alert(error.message);
       });
-  }
+  };
+
+  const disableButton = () => {
+    if (type === UPDATE) {
+      return (
+        <button
+          type='button'
+          data-autofocus
+          onClick={() => handleDel()}
+          className='inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto save-button'
+        >
+          Desativar
+        </button>
+      );
+    }
+    return <div></div>;
+  };
 
   useEffect(() => {
-    setIsLoading(true);
-    setName(data.name);
-    setArtist(data.artist);
-    setLaunchDate(data.launch_date);
-    setAlbumId(data.album_id);
-    getAlbums();
-    setIsLoading(false);
+    if (type === UPDATE) {
+      setIsLoading(true);
+      setName(data.name);
+      setArtist(data.artist);
+      setLaunchDate(data.launch_date);
+      setAlbumId(data.album_id);
+      getAlbums();
+      setTitle();
+      setIsLoading(false);
+    }
+
+    if (type === ADD) {
+      setIsLoading(true);
+      setName('');
+      setArtist('');
+      setLaunchDate('');
+      setAlbumId(1);
+      getAlbums();
+      setTitle();
+      setIsLoading(false);
+    }
   }, [openModal]);
 
   return isLoading ? (
@@ -109,7 +183,7 @@ const MusicModal = ({ openModal, setOpenModal, data }) => {
                     as='h3'
                     className='text-base font-semibold leading-6 text-gray-900 album-modal-title'
                   >
-                    Editar Música
+                    {modalTitle}
                   </DialogTitle>
                   <div className='mt-2 modal-div'>
                     <div>
@@ -195,19 +269,12 @@ const MusicModal = ({ openModal, setOpenModal, data }) => {
             <div className='bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6'>
               <button
                 type='button'
-                onClick={() => handleUpdate()}
+                onClick={() => handleSave()}
                 className='mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto'
               >
                 Salvar
               </button>
-              <button
-                type='button'
-                data-autofocus
-                onClick={() => handleDel()}
-                className='inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto save-button'
-              >
-                Desativar
-              </button>
+              {disableButton()}
             </div>
           </DialogPanel>
         </div>

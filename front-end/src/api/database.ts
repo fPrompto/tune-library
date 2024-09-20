@@ -93,14 +93,48 @@ export const getMusicById = (id: string) => {
   });
 };
 
-export const updateMusic = ({ id, name, artist, launch_date, album_id, active }) => {
+export const updateMusic = ({
+  id,
+  name,
+  artist,
+  launch_date,
+  album_id,
+  active,
+}) => {
   return new Promise((resolve, reject) => {
     $.ajax({
       url: `${BACKEND_URL}/music/update`,
       type: 'PUT',
       dataType: 'json',
       contentType: 'application/json',
-      data: JSON.stringify({ id, name, artist, launch_date,album_id , active }),
+      data: JSON.stringify({ id, name, artist, launch_date, album_id, active }),
+      success: function (response) {
+        console.log('data: ', response);
+        resolve(response);
+      },
+      error: function (_jqXHR, textStatus, errorThrown) {
+        console.error('error: ', textStatus, errorThrown);
+        reject(new Error('failed to fetch music data'));
+      },
+    });
+  });
+};
+
+export const createMusic = ({
+  id,
+  name,
+  artist,
+  launch_date,
+  album_id,
+  active,
+}) => {
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: `${BACKEND_URL}/music/create`,
+      type: 'POST',
+      dataType: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify({ id, name, artist, launch_date, album_id, active }),
       success: function (response) {
         console.log('data: ', response);
         resolve(response);
