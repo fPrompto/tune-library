@@ -20,6 +20,20 @@ module.exports = {
         launch_date: new Date('2010-07-27'),
         active: true,
       },
+      {
+        id: 2,
+        name: 'The Fame',
+        artist: 'Lady Gaga',
+        launch_date: new Date('2008-08-19');
+        active: true,
+      },
+      {
+        id: 3,
+        name: 'Álbum desativado',
+        artist: 'Visual Studio Code',
+        launch_date: new Date('2022-10-10'),
+        active: false,
+      },
     ]);
   },
 
