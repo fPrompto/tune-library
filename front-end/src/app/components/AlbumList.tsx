@@ -21,17 +21,18 @@ const AlbumList: React.FC<AlbumListProps> = ({
 }) => {
   const [selected, setSelected] = useState<AlbumI>(DEFAULT_ALBUM_DATA);
 
-  const setSelectedAlbum = (string: string): void => {
-    const findAlbum = albumList.find((item) => item.name === string);
+  const setSelectedAlbum = (albumId: number): void => {
+    console.log('|= select item VALUE =>', albumId);
+    const findAlbum = albumList.find((item) => Number(item.id) === albumId);
     if (findAlbum) {
       setSelected(findAlbum);
       setAlbumId(Number(findAlbum.id));
-      console.log('selected album =>', findAlbum);
+      console.log('|= selected album =>', findAlbum);
     }
   };
 
   useEffect(() => {
-    const findAlbum = albumList.find((item) => String(item.id) === albumId);
+    const findAlbum = albumList.find((item) => item.id === albumId);
     if (findAlbum) {
       setSelected(findAlbum);
     }
@@ -67,7 +68,7 @@ const AlbumList: React.FC<AlbumListProps> = ({
           {albumList.map((al) => (
             <ListboxOption
               key={al.id}
-              value={al.name}
+              value={al.id}
               className='group relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 data-[focus]:bg-indigo-600 data-[focus]:text-white'
             >
               <div className='flex items-center'>

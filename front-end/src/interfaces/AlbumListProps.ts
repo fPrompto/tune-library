@@ -3,7 +3,7 @@ import AlbumI from "./AlbumI"
 
 interface AlbumListProps {
   albumList: AlbumI[];
-  albumId: string;
+  albumId: number;
   setAlbumId: React.Dispatch<React.SetStateAction<number>>;
 }
 

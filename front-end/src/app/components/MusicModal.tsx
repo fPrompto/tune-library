@@ -48,6 +48,7 @@ const MusicModal: React.FC<MusicModalProps> = ({ openModal, setOpenModal, data, 
   };
 
   const handleUpdate = (): void => {
+    console.log('new album id', albumId);
     updateMusic({
       id: data.id,
       name,
@@ -250,7 +251,7 @@ const MusicModal: React.FC<MusicModalProps> = ({ openModal, setOpenModal, data, 
 
                     <AlbumList
                       albumList={albumList}
-                      albumId={String(albumId)}
+                      albumId={albumId}
                       setAlbumId={setAlbumId}
                     />
                   </div>
