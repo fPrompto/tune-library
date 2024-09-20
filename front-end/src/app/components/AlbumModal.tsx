@@ -29,14 +29,31 @@ const AlbumModal = ({ openModal, data }) => {
     })
       .then((data) => {
         console.log('new data:', data);
-        alert(data)
+        alert('updated at =>', data.updatedAt);
       })
       .catch((error) => {
         alert(error.message);
       });
+    setOpen(false);
   };
 
-  const handleDel = () => {};
+  const handleDel = () => {
+    updateAlbum({
+      id: data.id,
+      name: data.name,
+      artist: data.artist,
+      launch_date: data.launch_date,
+      active: false,
+    })
+      .then((data) => {
+        console.log('new data:', data);
+        alert('updated at =>', data.updatedAt);
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+    setOpen(false);
+  };
 
   useEffect(() => {
     setOpen(openModal);
