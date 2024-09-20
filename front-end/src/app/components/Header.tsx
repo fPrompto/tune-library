@@ -1,5 +1,9 @@
-import React from 'react';
-import Image from 'next/image';
+'use client';
+
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+// import Image from 'next/image';
 import {
   Disclosure,
   DisclosureButton,
@@ -11,13 +15,6 @@ import {
 } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
-const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
-];
-
 function classNames(
   ...classes: (string | boolean | null | undefined)[]
 ): string {
@@ -25,6 +22,30 @@ function classNames(
 }
 
 const Header: React.FC = () => {
+  const [currentAlbum, setCurrentAlbum] = useState(true);
+  const [currentMusic, setCurrentMusic] = useState(false);
+  
+  const router = useRouter();
+  
+  const clickAlbum = () => {
+    router.push('/');
+    setCurrentMusic(false);
+    setCurrentAlbum(true);
+  };
+  
+  const clickMusic = () => {
+    router.push('/musics');
+    setCurrentAlbum(false);
+    setCurrentMusic(true);
+  };
+  
+  const navigation = [
+    { name: 'Álbuns', onClick: clickAlbum, current: currentAlbum },
+    { name: 'Músicas', onClick: clickMusic, current: currentMusic },
+    // { name: 'Projects', href: '#', current: false },
+    // { name: 'Calendar', href: '#', current: false },
+  ];
+
   return (
     <Disclosure as='nav' className='bg-gray-800'>
       <div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
@@ -46,26 +67,26 @@ const Header: React.FC = () => {
           </div>
           <div className='flex flex-1 items-center justify-center sm:items-stretch sm:justify-start'>
             <div className='flex flex-shrink-0 items-center'>
-              {/* <img
+              <img
                 alt='Your Company'
                 src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500'
                 className='h-8 w-auto'
-              /> */}
-              <Image
+              />
+              {/* <Image
                 src='https://via.placeholder.com/150'
                 alt='Your Company'
                 className='h-8 w-auto'
                 width={180}
                 height={38}
                 priority
-              />
+              /> */}
             </div>
             <div className='hidden sm:ml-6 sm:block'>
               <div className='flex space-x-4'>
                 {navigation.map((item) => (
                   <a
                     key={item.name}
-                    href={item.href}
+                    onClick={item.onClick}
                     aria-current={item.current ? 'page' : undefined}
                     className={classNames(
                       item.current
@@ -81,17 +102,17 @@ const Header: React.FC = () => {
             </div>
           </div>
           <div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
-            <button
+            {/* <button
               type='button'
               className='relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'
             >
               <span className='absolute -inset-1.5' />
               <span className='sr-only'>View notifications</span>
               <BellIcon aria-hidden='true' className='h-6 w-6' />
-            </button>
+            </button> */}
 
             {/* Profile dropdown */}
-            <Menu as='div' className='relative ml-3'>
+            {/* <Menu as='div' className='relative ml-3'>
               <div>
                 <MenuButton className='relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
                   <span className='absolute -inset-1.5' />
@@ -132,7 +153,7 @@ const Header: React.FC = () => {
                   </a>
                 </MenuItem>
               </MenuItems>
-            </Menu>
+            </Menu> */}
           </div>
         </div>
       </div>
