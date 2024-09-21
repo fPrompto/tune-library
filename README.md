@@ -91,15 +91,3 @@ Caso precise reiniciar o banco de dados para as configurações padrão, utilize
 ```bash
 npm run db:start
 ``` 
-
-Com estas instruções, você estará pronto para explorar e gerenciar sua biblioteca de músicas usando o Tunes Library!
-
-Citations:
-[1] https://discussions.apple.com/thread/251139533
-[2] https://support.apple.com/guide/itunes/use-multiple-itunes-libraries-itns3259/windows
-[3] https://discussions.apple.com/thread/2687077
-[4] https://support.apple.com/guide/itunes/move-your-itunes-library-to-another-computer-itns3230/windows
-[5] https://support.apple.com/en-ke/guide/itunes/itns2999/windows
-[6] https://support.apple.com/guide/music/use-multiple-libraries-mus7663a920a/mac
-[7] https://support.apple.com/guide/itunes/from-a-shared-library-itns3018/windows
-[8] https://support.apple.com/en-gb/guide/music/musa3dd5209/mac
